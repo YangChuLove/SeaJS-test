@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script src="js/sea.js"></script>
+<script>
+
+    seajs.use('./js/module1.js',function (){
+        //两个参数：第一个参数：模块的地址；第二个参数：回调函； ‘./js/module1.js’：sea的默认根目录：sea.js这个文件
+        alert(123);  //当module1加载成功的时候弹出123
+    })
+
+    seajs.use('./js/module1.js',function (ex){  //参数可以随意起名，代表exports
+      ex.fn1();  //调用module1 的exports.fn1
+      show();   //调用module1 的show
+    })
+
+    //show(); 这样调用不到module1里的内容
+
+    seajs.use('./js/module2.js',function (ex){  //参数可以随意起名，代表exports
+        ex.fn2();  //调用module2 的exports.fn1
+        show();   //调用module1 的show
+       // ex.fn1();  调用不到module1 的exports.fn1
+    })
+</script>
+
+</body>
+</html>
